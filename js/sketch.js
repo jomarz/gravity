@@ -4,10 +4,20 @@ var speedRangeAuto = 7.5;
 var massMinAuto = 10;
 var massRangeAuto = 100;
 var distMinAuto = 10;
-var distRangeAuto = 300;
+var distRangeAuto = 500;
 var numMassesAuto = 500;
 var masses = [];
 var newMass = {};
+
+var theme = 'dark';
+var themes = {
+  dark: {
+    bg: 'black',
+    mass: 'white',
+    trayec: '#FF8C00',
+    newSpeed: '#C0C0C0'
+  }
+};
 
 var distance;
 var force;
@@ -28,9 +38,12 @@ var massesCanvas; //  this will be a graphics buffer to draw the masses
 var trayecCanvas; //  this will be a graphics buffer to draw the trayectories of the masses
 var velCanvas;  //  this will be a graphics buffer to draw the velocity vector of new masses
 
-var canvasWidth = 800;
-var canvasHeight = 600;
-var controlsHeight = 50;
+//var canvasWidth = $("#parent").width(); //800;
+var $canvas = $("#canvasContainer");
+var $parent = $canvas.parent();
+var canvasWidth = $parent.width();
+var canvasHeight = 550;
+var controlsHeight = 0;
 var bgColor;
 var bgRed = 200;
 var bgGreen = 200;
@@ -46,8 +59,10 @@ function setup() {
   trayecCanvas = createGraphics(canvasWidth, canvasHeight);
   velCanvas = createGraphics(canvasWidth, canvasHeight);
   ellipseMode(CENTER);
-  bgColor = color(200,200,200);
-  background(bgColor);
+  //bgColor = color(200,200,200);
+  console.log(themes[theme].bg);
+  bgColor = themes[theme].bg;
+  background(themes[theme].bg);
 }
 
 function draw() {
@@ -69,7 +84,7 @@ function draw() {
       masses[j].xAccel = 0;
       masses[j].yAccel = 0;
       //Draw a point in the trayectories buffer in the position of every mass
-      trayecCanvas.stroke('yellow');
+      trayecCanvas.stroke(themes[theme].trayec);
       trayecCanvas.strokeWeight(1);
       trayecCanvas.point(masses[j].xPos*magnif+screenCenterX, masses[j].yPos*magnif+screenCenterY);
     }
@@ -95,24 +110,7 @@ function draw() {
         }
       }
     }
-    /*var xCenterMass = 0;
-    var yCenterMass = 0;
-    var totalMass = 0;
-    var xTempCenter;
-    var yTempCenter;
-    for (j=0; j<masses.length; j++) {
-      xCenterMass += masses[j].xPos * masses[j].mass;
-      yCenterMass += masses[j].yPos * masses[j].mass;
-      totalMass += masses[j].mass;
-    }
-    xCenterMass = xCenterMass / totalMass;
-    yCenterMass = yCenterMass / totalMass;
-    for (j=0; j<masses.length) {
-      xTempCenter = xCenterMass-masses[j].xPos+masses[j].mass/totalMass;
-      yTempCenter = yCenterMass-masses[j].yPos+masses[j].mass/totalMass;
-      distance = dist(xTempCenter, yTempCenter, masses[j].xPos, masses[j].yPos);
-      force = G*(totalMass-masses[j].mass)*masses[j].mass/(distance*distace);
-    }*/
+    
     for (j=0; j<masses.length; j++) { // Get the new position and velocity of each mass
       masses[j].xVel += masses[j].xAccel*timeSpan;
       masses[j].yVel += masses[j].yAccel*timeSpan;
@@ -122,34 +120,35 @@ function draw() {
     //console.log(masses.length);
     if (walls == true) {  //Handle collisions the the borders of the canvas in case you want that
       for(j=0; j<masses.length; j++) {
-        if (masses[j].xPos<masses[j].radius/2 || masses[j].xPos>(canvasWidth-masses[j].radius)) { //If the ball has collided with the left or right borders
+        if (masses[j].xPos<masses[j].radius/2 || masses[j].xPos>(canvasWidth-masses[j].radius)) { //If the ball has collided with the left or right border, invert X speed
           masses[j].xVel = -masses[j].xVel;
         }
-        if (masses[j].yPos<masses[j].radius || masses[j].yPos>(canvasHeight-controlsHeight-masses[j].radius)) { //If the ball has collided with the left or right borders
+        if (masses[j].yPos<masses[j].radius || masses[j].yPos>(canvasHeight-controlsHeight-masses[j].radius)) { //If the ball has collided with the top or bottom border, invert Y speed
           masses[j].yVel = -masses[j].yVel;
         }
       }
     }
-    
-    clear();
-    background(bgColor);
-    if (showTrayectories == true) {
-      image(trayecCanvas);
-    }
-    fill('DimGray');
-    stroke('DimGray');
-    for(j=0; j<masses.length; j++) {
-      ellipse(masses[j].xPos*magnif+screenCenterX, masses[j].yPos*magnif+screenCenterY, ceil(masses[j].radius*magnif*2), ceil(masses[j].radius*magnif*2));
-    }
-    image(velCanvas);
-    fill('CadetBlue');
-    noStroke();
-    rect(0, height-controlsHeight, width, controlsHeight);
   }
+  clear();
+  background(bgColor);
+  if (showTrayectories == true) {
+    image(trayecCanvas);
+  }
+  fill(themes[theme].mass);
+  stroke(themes[theme].mass);
+  for(j=0; j<masses.length; j++) {
+    ellipse(masses[j].xPos*magnif+screenCenterX, masses[j].yPos*magnif+screenCenterY, ceil(masses[j].radius*magnif*2), ceil(masses[j].radius*magnif*2));
+  }
+  image(velCanvas);
+  fill('CadetBlue');
+  noStroke();
+  rect(0, height-controlsHeight, width, controlsHeight);
+  
 }
 
 function mouseClicked () {
-  if (mouseX > 0 && mouseX < width && mouseY > height-controlsHeight && mouseY < height) {//If click is done in the controls
+  //If click is done in the controls
+  if (mouseX > 0 && mouseX < width && mouseY > height-controlsHeight && mouseY < height) {
     if (playing == true) {
       playing = false;
     } else if (playing == false) {
@@ -159,6 +158,7 @@ function mouseClicked () {
 }
 
 function mouseWheel(event) {
+  //Mouse wheel changes zoom
   if (event.delta<0) {
     magnif = magnif*1.5;
   } else {
@@ -170,7 +170,9 @@ function mouseWheel(event) {
 }
 
 function mousePressed() {
-  if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height-controlsHeight) {
+  //Check if click is inside simulation area
+  if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height-controlsHeight) { 
+    //CONTROL + click activates dragging of the view 
     if (keyIsDown(CONTROL)) {
       drag = true;
     }
@@ -200,7 +202,7 @@ function mouseDragged() {
   else if (createMass == true) { //Show a line indicating the speed of the new mass to add
     velCanvas = createGraphics(canvasWidth, canvasHeight);
     velCanvas.strokeWeight(1);
-    velCanvas.stroke('blue');
+    velCanvas.stroke(themes[theme].newSpeed);
     velCanvas.line(newMass.xPos, newMass.yPos, mouseX, mouseY);
   }
   return false;
@@ -225,7 +227,7 @@ function mouseReleased() {
 function starCloud() {
   masses = [];
   newMass = {};
-  newMass = {
+  newMass = {   //Central star
     mass: 1000000,
     radius: 6,
     xPos: 0,
@@ -280,6 +282,16 @@ $(document).ready(function(){
   $("#starCloudBtn").click(function(){
     trayecCanvas = createGraphics(canvasWidth, canvasHeight);
     starCloud();
+  });
+  
+  $("#pauseBtn").click(function(){
+    if (playing == true) {
+      playing = false;
+      $("#pauseBtnIcon").attr('class', 'glyphicon glyphicon-play');
+    } else if (playing == false) {
+      playing = true;
+      $("#pauseBtnIcon").attr('class', 'glyphicon glyphicon-pause');
+    }
   });
   
   $("#timeSpan").val("1");

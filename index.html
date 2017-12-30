@@ -2,18 +2,40 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>P5</title>
+        <title>Gravity</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="lib/p5.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
     </head>
     <body>
-        <button id="clearAllBtn" value="false">Limpiar Todo</button>
-        <button id="trayecBtn" value="false">Trayectorias</button>
-        <button id="clearTrayecBtn" value="false">Limpiar Trayectorias</button>
-        <button id="starCloudBtn" value="false">Crear Nube</button>
-        <input type="text" id="mass" value="10" size="10">
-        Tiempo: x<input type="number" id="timeSpan" size="4">
-        <br>
-        <div id="canvasContainer" style="margin: 0.5em;"><script src="js/sketch.js"></script></div>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">GRAVITY</a>
+                </div>
+                <div class="nav navbar-nav">
+                    <form class="form-inline">
+                        <button id="clearAllBtn" value="false" type="button" class="btn navbar-btn">Limpiar Todo</button>
+                        <button id="trayecBtn" value="false" type="button" class="btn navbar-btn">Trayectorias</button>
+                        <button id="clearTrayecBtn" value="false" type="button" class="btn navbar-btn">Limpiar Trayectorias</button>
+                        <button id="starCloudBtn" value="false" type="button" class="btn navbar-btn btn-warning">Crear Nube</button>
+                        <button id="pauseBtn" value="false" type="button" class="btn navbar-btn"><span class="glyphicon glyphicon-pause" id="pauseBtnIcon" aria-hidden="true"></span></button>
+                        <div class="input-group">
+                            <span class="input-group-addon">Masa</span>
+                            <input type="text" id="mass" class="form-control" value="10">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Tiempo x</span>
+                            <input type="number" id="timeSpan" class="form-control">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <div class="content">
+            <div id="canvasContainer"><script src="js/sketch.js"></script></div>
+        </div>
     </body>
 </html>

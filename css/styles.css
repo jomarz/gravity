@@ -1,0 +1,17 @@
+body { padding-top: 70px; }
+
+.content {
+    width: 100%;
+    text-align: center;
+}
+
+#canvasContainer    {
+    width: 100%;
+}
+#mass{
+    width: 110px;    
+}
+
+#timeSpan    {
+    width: 85px;
+}
