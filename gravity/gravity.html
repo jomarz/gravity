@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Gravity</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="../lib/p5.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../css/styles.css">
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111703497-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'UA-111703497-1');
+        </script>
+        <!-- End of Analytics code -->
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">GRAVITY</a>
+                </div>
+                <div class="nav navbar-nav">
+                    <form class="form-inline">
+                        <button id="clearAllBtn" value="false" type="button" class="btn navbar-btn">Clear all</button>
+                        <button id="trayecBtn" value="false" type="button" class="btn navbar-btn">Trayectories</button>
+                        <button id="clearTrayecBtn" value="false" type="button" class="btn navbar-btn">Clear trayectories</button>
+                        <button id="starCloudBtn" value="false" type="button" class="btn navbar-btn btn-warning">Cloud</button>
+                        <button id="pauseBtn" value="false" type="button" class="btn navbar-btn"><span class="glyphicon glyphicon-pause" id="pauseBtnIcon" aria-hidden="true"></span></button>
+                        <div class="input-group">
+                            <span class="input-group-addon">Mass</span>
+                            <input type="text" id="mass" class="form-control" value="10">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Time</span>
+                            <input type="number" id="timeSpan" class="form-control">
+                        </div>
+                        <p>
+                            Click and drad to create moving masses or just create a proto-cloud with the Cloud button. Have fun!
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <div class="content">
+            <div id="canvasContainer"><script src="../js/sketch.js"></script></div>
+        </div>
+    </body>
+</html>

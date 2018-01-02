@@ -1,53 +1,103 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Gravity</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="lib/p5.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="css/styles.css">
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111703497-1"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-        
-          gtag('config', 'UA-111703497-1');
-        </script>
-    </head>
-    <body>
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">GRAVITY</a>
-                </div>
-                <div class="nav navbar-nav">
-                    <form class="form-inline">
-                        <button id="clearAllBtn" value="false" type="button" class="btn navbar-btn">Clear all</button>
-                        <button id="trayecBtn" value="false" type="button" class="btn navbar-btn">Trayectories</button>
-                        <button id="clearTrayecBtn" value="false" type="button" class="btn navbar-btn">Clear trayectories</button>
-                        <button id="starCloudBtn" value="false" type="button" class="btn navbar-btn btn-warning">Cloud</button>
-                        <button id="pauseBtn" value="false" type="button" class="btn navbar-btn"><span class="glyphicon glyphicon-pause" id="pauseBtnIcon" aria-hidden="true"></span></button>
-                        <div class="input-group">
-                            <span class="input-group-addon">Mass</span>
-                            <input type="text" id="mass" class="form-control" value="10">
-                        </div>
-                        <div class="input-group">
-                            <span class="input-group-addon">Time</span>
-                            <input type="number" id="timeSpan" class="form-control">
-                        </div>
-                        <p>
-                            Click and drad to create moving masses or just create a proto-cloud with the Cloud button. Have fun!
-                        </p>
-                    </form>
-                </div>
-            </div>
-        </nav>
-        <div class="content">
-            <div id="canvasContainer"><script src="js/sketch.js"></script></div>
-        </div>
-    </body>
+<html lang="en">
+<head>
+  <title>Dots for Things</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+    
+    #thumbnails    {
+        background-color: darkgray;
+        padding-bottom: 50px;
+    }
+    .jumbotron    {
+        margin-bottom: 0;
+    }
+  </style>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111703497-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-111703497-1');
+    </script>
+    <!-- End of Analytics code -->
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">Dots for Things</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <!--<li class="active"><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Contact</a></li>-->
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <!--<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>-->
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="jumbotron">
+  <div class="container text-center">
+    <h1>dots <small>for</small> things</h1>
+  </div>
+</div>
+
+<div id="thumbnails" class="container-fluid bg-2 text-center">
+  <div class="row bg-dark">
+    <div class="col-sm-4">
+      <!--<h2>Gravity</h2>
+      <img src="img/gravity.png" class="img-responsive" style="width:100%" alt="Image">-->
+    </div>
+    <div class="col-sm-4"> 
+      <h2>Gravity</h2>
+      <a href="gravity/gravity.html"><img src="img/gravity.png" class="img-responsive" style="width:100%" alt="Image"></a>
+    </div>
+    <div class="col-sm-4"> 
+      <!--<h2>Gravity</h2>
+      <img src="img/gravity.png" class="img-responsive" style="width:100%" alt="Image">-->
+    </div>
+  </div>
+</div>
+
+<footer class="container-fluid text-center">
+  <p>
+    <script>
+        var myuser = "jorgemartinez05";
+        var thehost = "gmail.com";
+        var linktext = myuser + "@" + thehost ;
+        document.write("<a href='" + "mail" + "to:" + myuser + "@" + thehost + "'>" + linktext + "</a>");
+    </script>
+  </p>
+</footer>
+
+</body>
 </html>
