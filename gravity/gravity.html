@@ -44,15 +44,17 @@
                         <button id="pauseBtn" value="false" type="button" class="btn navbar-btn"><span class="glyphicon glyphicon-pause" id="pauseBtnIcon" aria-hidden="true"></span></button>
                         <div class="input-group">
                             <span class="input-group-addon">Mass</span>
-                            <input type="text" id="mass" class="form-control" value="100000">
+                            <input type="number" id="mass" class="form-control" value="100000" min="1">
                         </div>
                         <div class="input-group">
                             <span class="input-group-addon">Time</span>
                             <input type="number" id="timeSpan" class="form-control">
                         </div>
+                        <button id="reCenterBtn" value="false" type="button" class="btn navbar-btn">Re-center</button>
                         <div class="fb-share-button" data-href="http://www.dotsforthings.com/gravity/gravity.html" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.dotsforthings.com%2Fgravity%2F&amp;src=sdkpreparse">Share</a></div>
                         <p>
-                            Click and drad to create moving masses or just create a proto-cloud with the Cloud button. Have fun!
+                            Click and drag to create moving masses or just create a proto-cloud with the Cloud button.<br>
+                            Mouse wheel zooms in-out. Ctrl+drag (Cmd+drag) Moves view around. Have fun!
                         </p>
                     </form>
                 </div>

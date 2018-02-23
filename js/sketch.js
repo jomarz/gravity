@@ -1,4 +1,4 @@
-var G = 0.00001;
+var G = 0.1;
 var speedMinAuto = 3;
 var speedRangeAuto = 7.5;
 var massMinAuto = 10;
@@ -49,8 +49,10 @@ var bgRed = 200;
 var bgGreen = 200;
 var bgBlue = 200;
 
-var screenCenterX = canvasWidth/2;
-var screenCenterY = (canvasHeight-controlsHeight)/2;
+var canvasCenterX = canvasWidth/2;
+var canvasCenterY = (canvasHeight-controlsHeight)/2
+var screenCenterX = canvasCenterX;
+var screenCenterY = canvasCenterY;
 
 function setup() {
   var myCanvas = createCanvas(canvasWidth,canvasHeight); //This also sets variables width and height equal to canvasWidth and canvasHeight
@@ -258,6 +260,10 @@ function starCloud() {
   }
 }
 
+function clearTrayec()  {
+  trayecCanvas = createGraphics(canvasWidth, canvasHeight);
+}
+
 $(document).ready(function(){
   $("#trayecBtn").click(function(){ //Turn On/Off displaying trayectories
     if($(this).val() == "false") {
@@ -276,7 +282,7 @@ $(document).ready(function(){
   });
   
   $("#clearTrayecBtn").click(function(){
-    trayecCanvas = createGraphics(canvasWidth, canvasHeight);
+    clearTrayec();
   });
   
   $("#starCloudBtn").click(function(){
@@ -292,6 +298,43 @@ $(document).ready(function(){
       playing = true;
       $("#pauseBtnIcon").attr('class', 'glyphicon glyphicon-pause');
     }
+  });
+  
+  $("#reCenterBtn").click(function(){
+    var totalMass = 0;
+    var cmxPos = 0;
+    var cmyPos = 0;
+    var cmxVel = 0;
+    var cmyVel = 0;
+    var cmxAccel = 0;
+    var cmyAccel = 0;
+    for (var i=0; i<masses.length; i++) {
+      totalMass += masses[i].mass;
+      cmxPos += masses[i].mass * masses[i].xPos;
+      cmyPos += masses[i].mass * masses[i].yPos;
+      cmxVel += masses[i].mass * masses[i].xVel;
+      cmyVel += masses[i].mass * masses[i].yVel;
+      cmxAccel += masses[i].mass * masses[i].xAccel;
+      cmyAccel += masses[i].mass * masses[i].yAccel;
+    }
+    cmxPos = cmxPos/totalMass;
+    cmyPos = cmyPos/totalMass;
+    cmxVel = cmxVel/totalMass;
+    cmyVel = cmyVel/totalMass;
+    cmxAccel = cmxAccel/totalMass;
+    cmyAccel = cmyAccel/totalMass;
+    for (var i=0; i<masses.length; i++) {
+      masses[i].xPos -= cmxPos;
+      masses[i].yPos -= cmyPos;
+      masses[i].xVel -= cmxVel;
+      masses[i].yVel -= cmyVel;
+      masses[i].xAccel -= cmxAccel;
+      masses[i].yAccel -= cmyAccel;
+    }
+    screenCenterX = canvasCenterX;
+    screenCenterY = canvasCenterY;
+    background(bgRed, bgGreen, bgBlue);
+    clearTrayec();
   });
   
   $("#timeSpan").val("1");
