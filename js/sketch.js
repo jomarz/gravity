@@ -1,4 +1,4 @@
-var G = 0.1;
+var G = 0.0000000001;
 var speedMinAuto = 3;
 var speedRangeAuto = 7.5;
 var massMinAuto = 10;
