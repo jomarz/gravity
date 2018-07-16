@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> </title>
+        <link rel="stylesheet" href="css/styles.css" type="text/css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+            var maxFPS = 2;    //Max number of frames per second
+            var lastFrameTimeMs = 0;    //Last time the Main Loop was run
+            var game_status = 'paused';
+            
+            function update() {
+               
+            }
+            function draw() {
+               
+            }
+            function mainLoop(timestamp) {  //Main game loop
+                if(game_status == "running") {
+                    if(timestamp >= lastFrameTimeMs + (1000/maxFPS)) {
+                        //Only update and render if there has passed enough time since last frame
+                        update();
+                        draw();
+                        lastFrameTimeMs = timestamp; 
+                    }
+                    requestAnimationFrame(mainLoop);  
+                }
+            }
+            $('#start_button').click(function() {
+                $('#start_button').disabled = true;
+                game_status = "running";
+                requestAnimationFrame(mainLoop);
+            });
+            $('#pause_button').click(function() {
+               game_status = "paused";
+            });
+            
+            }); //Closes $(document).ready
+        </script>
+    </head>
+    <body>
+       <div id='control_panel'>
+            <div id="button_container">
+            <button type='button' class='btn btn-info glyphicon glyphicon-play' id="start_button"></button>
+            <button type='button' class='btn btn-info glyphicon glyphicon-pause' id="pause_button"></button>
+            </div>
+        </div>
+        <div id='display'>
+            
+        </div>
+    </body>
+</html>

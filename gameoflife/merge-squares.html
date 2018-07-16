@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> </title>
+        <!-- Bootstrap compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        
+        <link rel="stylesheet" href="css/styles.css" type="text/css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script>
+            //There will be no success on this one. Though just coding it was cool
+            $(document).ready(function(){
+            var maxFPS = 2;    //Max number of frames per second
+            var lastFrameTimeMs = 0;    //Last time the Main Loop was run
+            var game_status = 'paused';
+            
+            var currentNumber = 1;
+            var success = false;
+            
+            function update() {
+                if (tryNumber(currentNumber)) {
+                    success = true;
+                    game_status = 'paused';
+                }
+                else {
+                    currentNumber += 1;
+                }
+            }
+            function draw() {
+                if (success == false) {
+                    $('#display').html("Intentando "+currentNumber+" ...");
+                }
+                if(success==true) {
+                    $('#display').html("Exito! Dos cuadrados de: "+currentNumber+" dan uno grande de "+(2*currentNumber));
+                }
+            }
+            function mainLoop(timestamp) {  //Main game loop
+                if(game_status == "running") {
+                    if(timestamp >= lastFrameTimeMs + (1000/maxFPS)) {
+                        //Only update and render if there has passed enough time since the last frame
+                        update();
+                        draw();
+                        lastFrameTimeMs = timestamp; 
+                    }
+                    requestAnimationFrame(mainLoop);  
+                }
+            }
+            function tryNumber(number) {
+                if (Math.sqrt(2*Math.pow(number,2)) % 1 == 0) {
+                    return(true);
+                }
+            }
+            //Assign values to DOM elements
+            $('#speedInput').val(maxFPS);
+            
+            //Create handlres for controls
+            $('#start_button').click(function() {
+                $('#start_button').disabled = true;
+                game_status = "running";
+                $('#display').html("Intentando "+currentNumber+" ...");
+                requestAnimationFrame(mainLoop);
+            });
+            $('#pause_button').click(function() {
+               game_status = "paused";
+            });
+            $('#speedInput').change(function(){
+                maxFPS = $(this).val();
+            });
+            
+            }); //Closes $(document).ready
+        </script>
+    </head>
+    <body>
+       <div id='control_panel'>
+            <div id="button_container">
+            <button type='button' class='btn btn-info glyphicon glyphicon-play' id="start_button"></button>
+            <button type='button' class='btn btn-info glyphicon glyphicon-pause' id="pause_button"></button>
+            <input type="number" id='speedInput'/>
+            </div>
+        </div>
+        <div id='display'>
+            
+        </div>
+    </body>
+</html>

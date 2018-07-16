@@ -1,0 +1,52 @@
+body {
+    background-color: WhiteSmoke;
+    font-size: 12px;
+}
+.field {
+    margin: 1px;
+    vertical-align: bottom;
+}
+.empty {
+    background-color: WhiteSmoke;
+}
+.alive {
+    background: WhiteSmoke url(../img/smalltoads.png) -139px 0;
+    /*background-color: OliveDrab;*/
+}
+#gridContainer {
+    display: inline-block;
+    margin: 4px;
+    text-align: right;
+}
+#gridRow {
+    line-height: normal;
+    font-size: 10px;
+    margin: 0px;
+    padding: 0px;
+}
+#wrapper {
+    margin-top: 8px;
+    text-align: center;
+}
+#control_panel {
+    vertical-align: top;
+    display: inline-block;
+    text-align: right;
+}
+#button_container {
+    margin: 5px;
+    display: inline-block;
+    vertical-align: top;
+}
+button:focus {
+    outline: none;
+}
+input {
+    margin-top: 4px;
+}
+input[type=number] {
+    width: 35px;
+}
+#tunner {
+    margin: 5px;
+}
